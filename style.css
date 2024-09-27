@@ -1,21 +1,22 @@
-table tr:first-child{
-    background-color: rgb(127, 240, 255);
+table, tr, td,th{
+    border: black 1px solid;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+thead tr{
+    background-color: rgb(255, 205, 255);
     font-weight: bold;
 }
 
-tr{
-    background-color: rgb(255, 205, 255);
+table tbody tr:hover{
+    background-color: rgb(238, 227, 178);
 }
 
-table tr:not(:first-child):hover{
-    background-color: rgb(255, 246, 205);
-}
-
-tr:nth-child(2n){
+tbody tr:nth-child(2n){
     background-color: rgb(213, 205, 255);
 }
 
-table{
-    border: black 1px solid;
-    text-align: center;
+tbody tr:nth-child(2n+1){
+    background-color: rgb(107, 188, 202);
 }
