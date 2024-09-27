@@ -1,0 +1,21 @@
+table tr:first-child{
+    background-color: rgb(127, 240, 255);
+    font-weight: bold;
+}
+
+tr{
+    background-color: rgb(255, 205, 255);
+}
+
+table tr:not(:first-child):hover{
+    background-color: rgb(255, 246, 205);
+}
+
+tr:nth-child(2n){
+    background-color: rgb(213, 205, 255);
+}
+
+table{
+    border: black 1px solid;
+    text-align: center;
+}
