@@ -41,6 +41,22 @@ tableheaderRow.appendChild(tableheaderRowFirstName)
 for (const person of array){  //person.lastname elérhető
 
     const tr = document.createElement("tr")
+
+    tr.addEventListener('click', function(e)
+    {
+        const selectedrow = tablebody.querySelector(".selected") //string paraméter, alapvetően tagekkel dolgozik, css-ből veszi át
+        e.currentTarget.classList.add('selected')
+        
+        if (selectedrow != undefined)
+            {
+                selectedrow.classList.remove('selected')
+            }
+            
+        console.log('click')
+
+    })
+
+
     const td = document.createElement("td")
     const firstname1td = document.createElement("td")
 
@@ -60,7 +76,10 @@ for (const person of array){  //person.lastname elérhető
         tr.appendChild(firstname2td)
 
     }
+   
 }
+
+
 
 
 
