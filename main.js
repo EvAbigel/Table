@@ -112,6 +112,33 @@ for (const person of array){  //person.lastname elérhető
     }
 }
 
+const form = document.getElementById("form")
+form.addEventListener('submit', function(e)
+{
+    e.preventDefault()
+    const LastNameInput = document.getElementById("lastname")
+    const FirstNameInput1 = document.getElementById("firstname1")
+    const FirstNameInput2 = document.getElementById("firstname2")
+    const MarriedInput = document.getElementById("married")
+    const PetInput = document.getElementById("pet")
+
+    const LNV = LastNameInput.value
+    const FNV = FirstNameInput1.value
+    const FNV2 = FirstNameInput2.value
+    const MV = MarriedInput.value
+    const PV = PetInput.value
+
+    array.push({
+        lastname: LNV,
+        firstname1: FNV,
+        firstname2: FNV2,
+        married: MV,
+        pet: PV
+    })
+
+    console.log(array)
+})
+
 
 
 
