@@ -89,7 +89,10 @@ for (const person of array){  //person.lastname elérhető
 
     if (person.firstname2 === undefined){ // 3db =  az típuscheck, 2db logikai vizsgálat
         firstname1td.colSpan = "2"
-        marriedtd.innerHtml = pers.married?"Igen":"Nem"
+        if (person.married)
+            marriedtd.innerHTML = "igen"        //innerHtml = pers.married?
+        else
+        marriedtd.innerHTML = "nem"
 
         tr.appendChild(marriedtd)
         tr.appendChild(pettd)
@@ -97,7 +100,11 @@ for (const person of array){  //person.lastname elérhető
     else{
         const firstname2td = document.createElement("td")
         firstname2td.innerHTML = person.firstname2
-        marriedtd.innerHtml = pers.married?"Igen":"Nem"
+
+        if (person.married)
+            marriedtd.innerHTML = "igen"
+        else
+        marriedtd.innerHTML = "nem"
 
         tr.appendChild(firstname2td)
         tr.appendChild(marriedtd)
