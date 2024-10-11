@@ -116,10 +116,35 @@ function RenderTable(){
     }
 }
 
+function ValidateFields(ln, fn1,p){ //HTML elementeket adjuk át
+    let result = true
+    const errorMessages = form.querySelectorAll('.error')  //ez egy lista, végig kell iterálni
+
+    for (const error of errorMessages)
+        error.innerHTML = ''
+
+    if (ln.value === ''){
+        const error = ln.parentElement.querySelector('.error')
+        error.innerHTML = "Vezetéknév kötelező!"
+        result = false
+    }
+    if (fn1.value === ''){
+        const error = fn1.parentElement.querySelector('.error')
+        error.innerHTML = "keresztnév kötelező!"
+        result = false
+    }
+    if (p.value === ''){
+        const error = p.parentElement.querySelector('.error')
+        error.innerHTML = "Kisállat kötelező!"
+        result = false
+    }
+
+    return result    
+}
+
 const form = document.getElementById("form")
 form.addEventListener('submit', function(e)
 {
-    tablebody.innerHTML = ''; //a táblát le kéne nullázni..
     e.preventDefault()
     const LastNameInput = document.getElementById("lastname")
     const FirstNameInput1 = document.getElementById("firstname1")
@@ -136,30 +161,35 @@ form.addEventListener('submit', function(e)
 
     let FNV2 = FirstNameInput2.value        //const-ot let-re
 
-    if (FNV2 === '')                       //Nem FNV2.value !!!  (FNV2.value.value nincs [ezt keresné])
+    if (FNV2 === '')                       //Nem FNV2.value !!!  (FNV2.value.value nincs [ezt keresné(?)])
         FNV2 = undefined
 
     */
+    //
 
     const MV = MarriedInput.value
     const PV = PetInput.value
 
-    array.push({
-        lastname: LNV,
-        firstname1: FNV,
-        firstname2: FNV2 === ''?undefined:FNV2, //2. megoldás
-        married: MV,
-        pet: PV
-    })
-
+    if(ValidateFields(lastname, firstname1, pet))
+        {
+            array.push({
+                lastname: LNV,
+                firstname1: FNV,
+                firstname2: FNV2 === ''?undefined:FNV2, //2. megoldás  "érték típus egyenlő ez?ha igen akkor az érték undefined:ha nem akkor ugyanaz marad"
+                married: MV,
+                pet: PV
+            })
+        }
+    
+    tablebody.innerHTML = ''; //a táblát le kéne nullázni..
     console.log(array)  //console-ra kiírja hgy változott az array tartalma
-    RenderTable();
+        RenderTable();
 })
 
 
 /*
 for (const index in array){  //array[index].lastname 
-    const person = array[index] // most ugyanolyan mind az első
+    const person = array[index] // most ugyanolyan mind az első 'for'
 }
 
 for (let i = 0; i<array.length; i++){ 
