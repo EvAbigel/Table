@@ -89,7 +89,7 @@ function RenderTable(){
         tr.appendChild(firstname1td)
         
     
-        if (person.firstname2 === undefined){ // 3db =  az típuscheck, 2db logikai vizsgálat
+        if (person.firstname2 === undefined){ // 3db =  az típuscheck és logikai vizsgálat, 2db csak logikai vizsgálat
             firstname1td.colSpan = "2"
 
             if (person.married)
