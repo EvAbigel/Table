@@ -32,33 +32,42 @@ const table = document.createElement('table');
 const tablebody = document.createElement('tbody');
 const tableheader = document.createElement('thead');
 const tableheaderRow = document.createElement('tr');
-const tableheaderRowLastName = document.createElement('th');
-const tableheaderRowFirstName = document.createElement('th');
-const tableheaderRowMarried = document.createElement('th');
-const tableheaderRowPet = document.createElement('th');
+//const tableheaderRowLastName = document.createElement('th');
+//const tableheaderRowFirstName = document.createElement('th');
+//const tableheaderRowMarried = document.createElement('th');
+//const tableheaderRowPet = document.createElement('th');
 
-tableheaderRowLastName.innerHTML = "Vezeteknev"
-tableheaderRowFirstName.innerHTML = "Keresztnev"
-tableheaderRowFirstName.colSpan = "2"
-tableheaderRowMarried.innerHTML = "Házas"
-tableheaderRowPet.innerHTML = "Állat"
+createTableCell('th', "Vezeteknev", tableheaderRow)
+const kernev = createTableCell('th', "Keresztnev", tableheaderRowFirstName)
+kernev.colSpan = 2
+createTableCell('th', "Házas",tableheaderRow)
+createTableCell('th', "Állat", tableheaderRow)
+
+
+
+//tableheaderRowLastName.innerHTML = "Vezeteknev"
+//tableheaderRowFirstName.innerHTML = "Keresztnev"
+//tableheaderRowFirstName.colSpan = "2"
+//tableheaderRowMarried.innerHTML = "Házas"
+//tableheaderRowPet.innerHTML = "Állat"
 
 
 document.body.appendChild(table)
 table.appendChild(tablebody)
 table.appendChild(tableheader)
 tableheader.appendChild(tableheaderRow)
-tableheaderRow.appendChild(tableheaderRowLastName)
-tableheaderRow.appendChild(tableheaderRowFirstName)
-tableheaderRow.appendChild(tableheaderRowMarried)
-tableheaderRow.appendChild(tableheaderRowPet)
+//tableheaderRow.appendChild(tableheaderRowLastName)
+//tableheaderRow.appendChild(tableheaderRowFirstName)
+//tableheaderRow.appendChild(tableheaderRowMarried)
+//tableheaderRow.appendChild(tableheaderRowPet)
 
 RenderTable();
 function RenderTable(){
     for (const person of array){  //person.lastname elérhető
 
         const tr = document.createElement("tr")
-    
+        tablebody.appendChild(tr)
+
         tr.addEventListener('click', function(e)
         {
             const selectedrow = tablebody.querySelector(".selected") //string paraméter, alapvetően tagekkel dolgozik, css-ből veszi át
@@ -84,7 +93,7 @@ function RenderTable(){
         marriedtd.innerHTML = person.married
         pettd.innerHTML = person.pet
     
-        tablebody.appendChild(tr)
+        
         tr.appendChild(td)
         tr.appendChild(firstname1td)
         
@@ -156,17 +165,6 @@ form.addEventListener('submit', function(e)
     const FNV = FirstNameInput1.value
     const FNV2 = FirstNameInput2.value
 
-    //const FNV2 = FirstNameInput2.value    //probléma a field-nél üres stringet add vissza a felhasználótól (a visszatérési érték minding string), 
-    /* --- 1. megoldás   ------                        // a vizsgálás bedig 'undefined'-al történik
-
-    let FNV2 = FirstNameInput2.value        //const-ot let-re
-
-    if (FNV2 === '')                       //Nem FNV2.value !!!  (FNV2.value.value nincs [ezt keresné(?)])
-        FNV2 = undefined
-
-    */
-    //
-
     const MV = MarriedInput.value
     const PV = PetInput.value
 
@@ -184,15 +182,20 @@ form.addEventListener('submit', function(e)
     tablebody.innerHTML = ''; //a táblát le kéne nullázni..
     console.log(array)  //console-ra kiírja hgy változott az array tartalma
         RenderTable();
-})
-
-
-/*
-for (const index in array){  //array[index].lastname 
-    const person = array[index] // most ugyanolyan mind az első 'for'
 }
+)
 
-for (let i = 0; i<array.length; i++){ 
-    
+/**
+ * Creates a new cell
+ * @param {'td'|'th'} tagName 
+ * @param {string} innerH 
+ * @param {HTMLTableRowElement} parent
+ * @returns {HTMLTableCellElement}
+ */
+function createTableCell(tagName, innerH, parent){
+    const element = document.createElement(tagName);
+    element.innerHTML(innerH);
+    parent.appendChild(element);
+
+    return element;
 }
-*/
