@@ -32,34 +32,18 @@ const table = document.createElement('table');
 const tablebody = document.createElement('tbody');
 const tableheader = document.createElement('thead');
 const tableheaderRow = document.createElement('tr');
-//const tableheaderRowLastName = document.createElement('th');
-//const tableheaderRowFirstName = document.createElement('th');
-//const tableheaderRowMarried = document.createElement('th');
-//const tableheaderRowPet = document.createElement('th');
 
 createTableCell('th', "Vezeteknev", tableheaderRow)
-const kernev = createTableCell('th', "Keresztnev", tableheaderRowFirstName)
+const kernev = createTableCell('th', "Keresztnev", tableheaderRow)
 kernev.colSpan = 2
 createTableCell('th', "Házas",tableheaderRow)
 createTableCell('th', "Állat", tableheaderRow)
-
-
-
-//tableheaderRowLastName.innerHTML = "Vezeteknev"
-//tableheaderRowFirstName.innerHTML = "Keresztnev"
-//tableheaderRowFirstName.colSpan = "2"
-//tableheaderRowMarried.innerHTML = "Házas"
-//tableheaderRowPet.innerHTML = "Állat"
 
 
 document.body.appendChild(table)
 table.appendChild(tablebody)
 table.appendChild(tableheader)
 tableheader.appendChild(tableheaderRow)
-//tableheaderRow.appendChild(tableheaderRowLastName)
-//tableheaderRow.appendChild(tableheaderRowFirstName)
-//tableheaderRow.appendChild(tableheaderRowMarried)
-//tableheaderRow.appendChild(tableheaderRowPet)
 
 RenderTable();
 function RenderTable(){
@@ -194,7 +178,7 @@ form.addEventListener('submit', function(e)
  */
 function createTableCell(tagName, innerH, parent){
     const element = document.createElement(tagName);
-    element.innerHTML(innerH);
+    element.innerHTML= innerH;
     parent.appendChild(element);
 
     return element;
