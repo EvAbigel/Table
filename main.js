@@ -28,82 +28,36 @@ let array = [
     },
 ]
 
-const table = document.createElement('table');
-const tablebody = document.createElement('tbody');
-const tableheader = document.createElement('thead');
-const tableheaderRow = document.createElement('tr');
 
-createTableCell('th', "Vezeteknev", tableheaderRow)
-const kernev = createTableCell('th', "Keresztnev", tableheaderRow)
-kernev.colSpan = 2
-createTableCell('th', "Házas",tableheaderRow)
-createTableCell('th', "Állat", tableheaderRow)
+//const table = document.createElement('table');
+//document.body.appendChild(table)
 
+//const tablebody = document.createElement('tbody');
+//table.appendChild(tablebody)
 
-document.body.appendChild(table)
-table.appendChild(tablebody)
-table.appendChild(tableheader)
-tableheader.appendChild(tableheaderRow)
+//const tableheader = document.createElement('thead');
+//table.appendChild(tableheader)
 
-RenderTable();
-function RenderTable(){
-    for (const person of array){  //person.lastname elérhető
+//const tableheaderRow = document.createElement('tr');
+//tableheader.appendChild(tableheaderRow)
 
-        const tr = document.createElement("tr")
-        tablebody.appendChild(tr)
+createHTMLElement('table', 'personTable', document.body)
 
-        tr.addEventListener('click', function(e)
-        {
-            const selectedrow = tablebody.querySelector(".selected") //string paraméter, alapvetően tagekkel dolgozik, css-ből veszi át
-            e.currentTarget.classList.add('selected')
-    
-            if (selectedrow != undefined)
-                {
-                    selectedrow.classList.remove('selected')
-                }
-                
-            console.log('click')
-    
-        })
-    
-    
-        
-        createTableCell('td', person.lastname, tr)
-        const firstname1td = createTableCell('td', person.firstname1, tr)
-        const marriedtd = document.createElement("td")
-        
-        marriedtd.innerHTML = person.married
-        
-        
-    
-        if (person.firstname2 === undefined){ // 3db =  az típuscheck és logikai vizsgálat, 2db csak logikai vizsgálat
-            firstname1td.colSpan = "2"
+createHTMLElementWithParentId('thead', 'personTableHeader', 'personTable')
+createHTMLElementWithParentId('tbody', 'personTableBody', 'personTable')
+createHTMLElementWithParentId('tr', 'personTableHeaderRow', 'personTableHeader')
 
-            if (person.married){
-                marriedtd.innerHTML = "igen"        //innerHtml = person.married ? valami : másvalami
-            }
-            else{
-            marriedtd.innerHTML = "nem"
-            }
-            tr.appendChild(marriedtd)
-            createTableCell('td', person.pet ,tr)
-        }
-        else{
-            const firstname2td = document.createElement("td")
-            firstname2td.innerHTML = person.firstname2
-    
-            if (person.married)
-                marriedtd.innerHTML = "igen"
-            else
-            marriedtd.innerHTML = "nem"
-    
-            tr.appendChild(firstname2td)
-            tr.appendChild(marriedtd)
-            createTableCell('td', person.pet ,tr)
-        }
-    }
-}
+renderTableHeader()
 
+RenderTable(array);
+
+/**
+ * Asks for the fields in the form, if one is empty, it rejects the request to add them
+ * @param {*} ln 
+ * @param {*} fn1 
+ * @param {*} p 
+ * @returns 
+ */
 function ValidateFields(ln, fn1,p){ //HTML elementeket adjuk át
     let result = true
     const errorMessages = form.querySelectorAll('.error')  //ez egy lista, végig kell iterálni
@@ -157,27 +111,13 @@ form.addEventListener('submit', function(e)
                 pet: PV
             })
         
-    
+    const tablebody = document.getElementById('personTableBody')
     tablebody.innerHTML = ''; //a táblát le kéne nullázni..
     console.log(array)  //console-ra kiírja hgy változott az array tartalma
-        RenderTable();
+        RenderTable(array);
     };
     
     form.reset()
 }
 )
 
-/**
- * Creates a new cell
- * @param {'td'|'th'} tagName 
- * @param {string} innerH 
- * @param {HTMLTableRowElement} parent
- * @returns {HTMLTableCellElement}
- */
-function createTableCell(tagName, innerH, parent){
-    const element = document.createElement(tagName);
-    element.innerHTML= innerH;
-    parent.appendChild(element);
-
-    return element;
-}
