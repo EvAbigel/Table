@@ -67,31 +67,26 @@ function RenderTable(){
         })
     
     
-        const td = document.createElement("td")
-        const firstname1td = document.createElement("td")
-        const marriedtd = document.createElement("td")
-        const pettd = document.createElement("td")
-    
-        td.innerHTML = person.lastname
-        firstname1td.innerHTML = person.firstname1
-        marriedtd.innerHTML = person.married
-        pettd.innerHTML = person.pet
-    
         
-        tr.appendChild(td)
-        tr.appendChild(firstname1td)
+        createTableCell('td', person.lastname, tr)
+        const firstname1td = createTableCell('td', person.firstname1, tr)
+        const marriedtd = document.createElement("td")
+        
+        marriedtd.innerHTML = person.married
+        
         
     
         if (person.firstname2 === undefined){ // 3db =  az típuscheck és logikai vizsgálat, 2db csak logikai vizsgálat
             firstname1td.colSpan = "2"
 
-            if (person.married)
+            if (person.married){
                 marriedtd.innerHTML = "igen"        //innerHtml = person.married ? valami : másvalami
-            else
+            }
+            else{
             marriedtd.innerHTML = "nem"
-    
+            }
             tr.appendChild(marriedtd)
-            tr.appendChild(pettd)
+            createTableCell('td', person.pet ,tr)
         }
         else{
             const firstname2td = document.createElement("td")
@@ -104,7 +99,7 @@ function RenderTable(){
     
             tr.appendChild(firstname2td)
             tr.appendChild(marriedtd)
-            tr.appendChild(pettd)
+            createTableCell('td', person.pet ,tr)
         }
     }
 }
@@ -161,11 +156,14 @@ form.addEventListener('submit', function(e)
                 married: MV,
                 pet: PV
             })
-        }
+        
     
     tablebody.innerHTML = ''; //a táblát le kéne nullázni..
     console.log(array)  //console-ra kiírja hgy változott az array tartalma
         RenderTable();
+    };
+    
+    form.reset()
 }
 )
 
