@@ -1,3 +1,5 @@
+//to ask on friday: married stays true no matter what??
+
 let array = [
     {
         firstname1: 'Géza',
@@ -28,19 +30,6 @@ let array = [
     },
 ]
 
-
-//const table = document.createElement('table');
-//document.body.appendChild(table)
-
-//const tablebody = document.createElement('tbody');
-//table.appendChild(tablebody)
-
-//const tableheader = document.createElement('thead');
-//table.appendChild(tableheader)
-
-//const tableheaderRow = document.createElement('tr');
-//tableheader.appendChild(tableheaderRow)
-
 createHTMLElement('table', 'personTable', document.body)
 
 createHTMLElementWithParentId('thead', 'personTableHeader', 'personTable')
@@ -50,39 +39,6 @@ createHTMLElementWithParentId('tr', 'personTableHeaderRow', 'personTableHeader')
 renderTableHeader()
 
 RenderTable(array);
-
-/**
- * Asks for the fields in the form, if one is empty, it rejects the request to add them
- * @param {*} ln 
- * @param {*} fn1 
- * @param {*} p 
- * @returns 
- */
-function ValidateFields(ln, fn1,p){ //HTML elementeket adjuk át
-    let result = true
-    const errorMessages = form.querySelectorAll('.error')  //ez egy lista, végig kell iterálni
-
-    for (const error of errorMessages)
-        error.innerHTML = ''
-
-    if (ln.value === ''){
-        const error = ln.parentElement.querySelector('.error')
-        error.innerHTML = "Vezetéknév kötelező!"
-        result = false
-    }
-    if (fn1.value === ''){
-        const error = fn1.parentElement.querySelector('.error')
-        error.innerHTML = "keresztnév kötelező!"
-        result = false
-    }
-    if (p.value === ''){
-        const error = p.parentElement.querySelector('.error')
-        error.innerHTML = "Kisállat kötelező!"
-        result = false
-    }
-
-    return result    
-}
 
 const form = document.getElementById("form")
 form.addEventListener('submit', function(e)
