@@ -15,9 +15,9 @@ function createTableCell(tagName, innerH, parent){
 
 /**
  * Creates a new element, then adds an id, then appends to parent, 3 inputs needed
- * @param {*} tag 
+ * @param {HTMLElement} tag 
  * @param {string} id 
- * @param {*} parent 
+ * @param {HTMLElement} parent 
  */
 function createHTMLElement(tag, id, parent){
     const element = document.createElement(tag);
@@ -27,9 +27,9 @@ function createHTMLElement(tag, id, parent){
 
 /**
  * Creates a new element with createHTMLElement() but instead of asking for the parent element, it needs a parent id, 3 inputs needed
- * @param {*} tag 
- * @param {*} id 
- * @param {*} parentId 
+ * @param {HTMLElement} tag 
+ * @param {string} id 
+ * @param {HTMLElement} parentId 
  */
 function createHTMLElementWithParentId(tag, id, parentId){
     const parent = document.getElementById(parentId)
@@ -117,7 +117,7 @@ function RenderTable(personArray){
  * @param {*} ln 
  * @param {*} fn1 
  * @param {*} p 
- * @returns 
+ * @returns {bool}
  */
 function ValidateFields(ln, fn1,p){ //HTML elementeket adjuk át
     let result = true
@@ -126,21 +126,26 @@ function ValidateFields(ln, fn1,p){ //HTML elementeket adjuk át
     for (const error of errorMessages)
         error.innerHTML = ''
 
-    if (ln.value === ''){
-        const error = ln.parentElement.querySelector('.error')
-        error.innerHTML = "Vezetéknév kötelező!"
-        result = false
-    }
-    if (fn1.value === ''){
-        const error = fn1.parentElement.querySelector('.error')
-        error.innerHTML = "keresztnév kötelező!"
-        result = false
-    }
-    if (p.value === ''){
-        const error = p.parentElement.querySelector('.error')
-        error.innerHTML = "Kisállat kötelező!"
-        result = false
-    }
+     result = ValidateElement(ln, "Vezetéknév kötelező!")
+     result = ValidateElement(fn1, "Keresztnév kötelező!")
+    result = ValidateElement(p, "Kisállat kötelező!")
 
     return result    
+}
+
+/**
+ * Checks if an element has an empty string value, if its empty, it will return a false value and sets an error message
+ * @param {HTMLElement} element 
+ * @param {string} errorMessage
+ * @returns {bool}
+ */
+function ValidateElement(element, errorMessage){
+
+    if (element.value === '' ){
+        const error = element.parentElement.querySelector('.error')
+        error.innerHTML = errorMessage
+        return false;
+    }
+    else
+        return true;
 }
