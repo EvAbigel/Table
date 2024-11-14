@@ -54,7 +54,7 @@ form.addEventListener('submit', function(e)
     const FNV = FirstNameInput1.value
     const FNV2 = FirstNameInput2.value
 
-    const MV = MarriedInput.value
+    const MV = MarriedInput.checked
     const PV = PetInput.value
 
     if(ValidateFields(lastname, firstname1, pet))
