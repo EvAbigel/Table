@@ -1,5 +1,3 @@
-//to ask on friday: married stays true no matter what??
-
 let array = [
     {
         firstname1: 'Géza',
